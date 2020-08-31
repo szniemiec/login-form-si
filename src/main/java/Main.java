@@ -1,13 +1,15 @@
-import database.DatabaseCredentials;
-import database.PostgreSQLJDBC;
-import services.JSONService;
+import dao.UserDaoImpl;
+import server.Server;
+
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
-        JSONService jsonService = new JSONService();
-        DatabaseCredentials databaseCredentials = jsonService.readEnviroment();
-        PostgreSQLJDBC database = new PostgreSQLJDBC();
-        database.connectToDatabase(databaseCredentials);
+    public static void main(String[] args) throws IOException {
+        Server server = new Server();
+        server.run();
+
+        UserDaoImpl userDao = new UserDaoImpl();
+        userDao.getLoggedUser("test@test.pl", "Test12321");
     }
 }

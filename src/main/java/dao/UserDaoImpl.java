@@ -17,6 +17,7 @@ public class UserDaoImpl implements UserDao {
             Statement st = database.getConnection().createStatement();
             ResultSet rs = st.executeQuery(SELECT_SQL);
             if (rs.next()) {
+                database.disconnect();
                 return createUser(rs);
             }
         } catch (Exception e) {
